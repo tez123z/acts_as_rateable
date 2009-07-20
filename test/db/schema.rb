@@ -6,7 +6,7 @@ ActiveRecord::Schema.define(:version => 0) do
 
   create_table "ratings", :force => true do |t|
     t.integer  "rateable_id"
-    t.string   "rateable_type", :limit => 32
+    t.string   "rateable_type"
     t.integer  "user_id"
     t.integer  "score"
     t.datetime "created_at"

@@ -2,10 +2,9 @@ class ActsAsRateableMigration < ActiveRecord::Migration
   def self.up
     
     create_table :ratings do |t|
-    	t.column :user_id, :integer
-      t.column :score, :integer
-      t.column :rateable_id, :integer
-      t.column :rateable_type, :string, :limit => 32
+      t.references :rateable, :polymorphic => true
+      t.references :user
+      t.integer :score
       t.timestamps
     end
     
