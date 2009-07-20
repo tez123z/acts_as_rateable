@@ -23,7 +23,6 @@ class ActsAsRateableUpdate1 < ActiveRecord::Migration
         sql = "SELECT rateable_id, rateable_type, user_id, score, old_ratings.created_at, old_ratings.updated_at " +
           "FROM old_ratings INNER JOIN old_rates ON old_ratings.rate_id = old_rates.id"
         connection.select_all(sql).each do |row|
-          puts row.inspect
           rating = Rating.find_or_create_by_rateable_id_and_rateable_type(
             :rateable_id => row['rateable_id'],
             :rateable_type => row['rateable_type'],
