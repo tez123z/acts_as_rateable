@@ -4,9 +4,9 @@ class Rating < ActiveRecord::Base
   validates_uniqueness_of :user_id, :scope => [:rateable_id, :rateable_type]
   validate :max_rating_allowed_by_parent
   delegate :max_rating, :to => :rateable
-  
-private
-  
+
+  private
+
   def max_rating_allowed_by_parent
     if score < 1
       errors.add(:score, "must be greater than or equal to 1")
