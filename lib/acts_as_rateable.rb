@@ -7,12 +7,14 @@ module ActiveRecord
 
       module ClassMethods
         def acts_as_rateable(options = {})
-          has_many :ratings, :as => :rateable, :dependent => :destroy
+          has_one :rating, :as => :rateable, :dependent => :destroy
+
           unless respond_to?(:max_rating)
             class_inheritable_accessor :max_rating
             attr_protected :max_rating
             self.max_rating = options[:max_rating] || 5
           end
+
           include ActiveRecord::Acts::Rateable::InstanceMethods
         end
       end
@@ -20,15 +22,13 @@ module ActiveRecord
       module InstanceMethods
         # Rates the object by a given score. A user object should be passed to the method.
         def rate_it(score, user)
-          returning(ratings.find_or_initialize_by_user_id(user.id)) do |rating|
-            rating.update_attributes!(:score => score)
-          end
+          create_rating unless rating
+          rating.rate(score, user)
         end
 
         # Calculates the average rating. Calculation based on the already given scores.
         def average_rating
-          avg = ratings.average(:score)
-          avg || 0.0
+          rating && rating.average_rating || 0.0
         end
 
         # Rounds the average rating value.
@@ -44,13 +44,13 @@ module ActiveRecord
 
         # Checks whether a user rated the object or not.
         def rated_by?(user)
-          ratings.exists?(:user_id => user)
+          rating.user_ratings.exists?(:user_id => user)
         end
 
         # Returns the rating a specific user has given the object.
         def rating_by(user)
-          rating = ratings.find_by_user_id(user.id)
-          rating ? rating.score : nil
+          user_rating = rating.user_ratings.find_by_user_id(user.id)
+          user_rating ? user_rating.score : nil
         end
 
       end

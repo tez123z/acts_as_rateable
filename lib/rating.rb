@@ -1,9 +1,21 @@
 class Rating < ActiveRecord::Base
   belongs_to :rateable, :polymorphic => true
-  validates_presence_of :score
-  validates_uniqueness_of :user_id, :scope => [:rateable_id, :rateable_type]
-  validate :max_rating_allowed_by_parent
+  has_many :user_ratings
+
   delegate :max_rating, :to => :rateable
+
+  def rate(score, user)
+    user_ratings.find_or_initialize_by_user_id(user.id).update_attributes!(:score => score)
+    reload
+  end
+
+  # Call this method the update the avarage rating; you don't normally need to
+  # do this manually, saving or updating a user rating already takes care of
+  # updating the avarage rating.
+  def update_rating
+    self.average_rating = user_ratings.average(:score)
+    save!
+  end
 
   private
 
