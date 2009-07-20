@@ -20,10 +20,19 @@ class ActsAsRateableUpdate1 < ActiveRecord::Migration
 
     say_with_time "migrating exsting ratings" do
       connection.transaction do
-        sql = "SELECT rateable_id, rateable_type, user_id, score FROM old_ratings INNER JOIN old_rates ON old_ratings.rate_id = old_rates.id"
+        sql = "SELECT rateable_id, rateable_type, user_id, score, old_ratings.created_at, old_ratings.updated_at " +
+          "FROM old_ratings INNER JOIN old_rates ON old_ratings.rate_id = old_rates.id"
         connection.select_all(sql).each do |row|
-          rating = Rating.find_or_create_by_rateable_id_and_rateable_type(row['rateable_id'], row['rateable_type'])
-          rating.user_ratings.find_or_create_by_user_id(:user_id => row['user_id'], :score => row['score'])
+          puts row.inspect
+          rating = Rating.find_or_create_by_rateable_id_and_rateable_type(
+            :rateable_id => row['rateable_id'],
+            :rateable_type => row['rateable_type'],
+            :created_at => row['created_at'])
+          rating.user_ratings.find_or_create_by_user_id(
+            :user_id => row['user_id'],
+            :score => row['score'],
+            :created_at => row['created_at'],
+            :updated_at => row['updated_at'])
         end
         Rating.find(:all).each {|rating| rating.update_rating }
       end
