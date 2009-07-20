@@ -1,4 +1,4 @@
-class ActsAsRateableUpdate1Rename < ActiveRecord::Migration
+class ActsAsRateableUpdate1 < ActiveRecord::Migration
   def self.up
     rename_table "rates", "old_rates"
     rename_table "ratings", "old_ratings"
