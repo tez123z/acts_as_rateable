@@ -8,6 +8,7 @@ ActiveRecord::Schema.define(:version => 0) do
     t.integer  "rateable_id", :nil => false
     t.string   "rateable_type", :nil => false
     t.float    "average_rating"
+    t.integer  "ratings_count"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

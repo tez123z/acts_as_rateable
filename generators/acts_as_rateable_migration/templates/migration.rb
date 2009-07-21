@@ -3,6 +3,7 @@ class ActsAsRateableMigration < ActiveRecord::Migration
     create_table "ratings" do |t|
       t.references "rateable",       :polymorphic => true, :nil => false
       t.float      "average_rating"
+      t.integer    "ratings_count"
       t.timestamps
     end
     add_index "ratings", ["rateable_id", "rateable_type"]

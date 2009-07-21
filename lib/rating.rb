@@ -14,6 +14,7 @@ class Rating < ActiveRecord::Base
   # updating the avarage rating.
   def update_rating
     self.average_rating = user_ratings.average(:score)
+    self.ratings_count = user_ratings.count
     save!
   end
 

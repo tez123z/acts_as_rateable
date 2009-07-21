@@ -26,7 +26,7 @@ module ActiveRecord
           rating.rate(score, user)
         end
 
-        # Calculates the average rating. Calculation based on the already given scores.
+        # Returns the average rating. Calculation based on the already given scores.
         def average_rating
           rating && rating.average_rating || 0.0
         end
@@ -40,6 +40,11 @@ module ActiveRecord
         def average_rating_percent
           f = 100 / max_rating.to_f
           average_rating * f
+        end
+
+        # Returns the number of ratings.
+        def ratings_count
+          rating && rating.ratings_count || 0
         end
 
         # Checks whether a user rated the object or not.
