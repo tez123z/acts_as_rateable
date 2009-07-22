@@ -15,7 +15,22 @@ module ActiveRecord
             self.max_rating = options[:max_rating] || 5
           end
 
+          include ActiveRecord::Acts::Rateable::ClassMethods
           include ActiveRecord::Acts::Rateable::InstanceMethods
+        end
+      end
+
+      module ClassMethods
+        # Returns the top rated records, ordered by their average rating.
+        # You can use the usual finder parameters to narrow down the records
+        # to return.
+        # The finder limits the number of returned records to 20 by default.
+        # Specify :limit to change it.
+        def find_top_rated(params = {})
+          find_params = params.merge(:include => :rating)
+          find_params[:order] = ['ratings.average_rating DESC', find_params.delete(:order)].compact.join(", ")
+          find_params[:limit] = 20 unless find_params.key?(:limit)
+          find(:all, find_params)
         end
       end
 

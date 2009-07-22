@@ -37,6 +37,7 @@ Now your model is extended by the plugin, you can rate it (1-#) or calculate the
     @post.rating_by(current_user) #=> 4
     @post.ratings_couunt          #=> 1
 
+    Post.find_top_rated           #=> top rated records
 
 Optional you can specify the highest score using the :max_rating paramter as follows. The default for :max_rating is 5.
 

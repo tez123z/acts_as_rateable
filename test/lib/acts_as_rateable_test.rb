@@ -33,4 +33,12 @@ class ActsAsRateableTest < ActiveSupport::TestCase
     assert_equal 3.0, books(:alice).average_rating
   end
 
+  test "Rateable.find_top_rated" do
+    books(:lotr).rate_it(5, users(:bill))
+    books(:alice).rate_it(4, users(:jane))
+    assert_equal [books(:lotr), books(:alice)], Book.find_top_rated
+    assert_equal [books(:lotr), books(:alice)], Book.find_top_rated(:order => "books.title ASC")
+    assert_equal [books(:lotr)], Book.find_top_rated(:limit => 1)
+  end
+
 end
