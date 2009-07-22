@@ -14,9 +14,22 @@ The original plugin is used on cotcot.hu for article rating, sponsored quizzes, 
 
 = Installation
 
-To install this plugin, use:
+== Install as gem (recommended)
 
-    script/plugin install git://github.com/mreinsch/acts_as_rateable.git
+Install as a gem:
+
+    $ sudo gem install mreinsch-acts_as_rateable
+
+Then add the gem dependency in your config:
+
+    # config/environment.rb
+    config.gem "mreinsch-acts_as_rateable", :source => "http://gems.github.com", :lib => "acts_as_rateable"
+
+== Install as plugin
+
+To install as a plugin, use:
+
+    $ ./script/plugin install git://github.com/mreinsch/acts_as_rateable.git
 
 = Example Usage
 
