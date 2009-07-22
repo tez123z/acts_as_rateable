@@ -9,6 +9,7 @@ Gem::Specification.new do |s|
   s.has_rdoc = true
   s.authors  = ["Ferenc Fekete", "Gabriel Gironda", "Michael Reinsch"]
   s.files    = ["README.rdoc",
+                "MIT-LICENSE",
                 "Rakefile",
                 "init.rb",
                 "rails/init.rb",
@@ -20,6 +21,6 @@ Gem::Specification.new do |s|
                 "generators/acts_as_rateable_migration/templates/migration.rb",
                 "generators/acts_as_rateable_migration/acts_as_rateable_migration_generator.rb"]
   s.rdoc_options = ["--main", "README.rdoc"]
-  s.extra_rdoc_files = ["README.rdoc"]
+  s.extra_rdoc_files = ["MIT-LICENSE", "README.rdoc"]
 end
 
