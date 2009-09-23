@@ -1,7 +1,7 @@
 Gem::Specification.new do |s|
   s.name     = "acts_as_rateable"
-  s.version  = "2.0"
-  s.date     = "2009-07-22"
+  s.version  = "2.0.1"
+  s.date     = "2009-09-23"
   s.summary  = "Rails plugin providing a rating interface for ActiveRecord models"
   s.email    = "michael@mobalean.com"
   s.homepage = "http://github.com/mreinsch/acts_as_rateable"

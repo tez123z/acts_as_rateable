@@ -41,4 +41,10 @@ class ActsAsRateableTest < ActiveSupport::TestCase
     assert_equal [books(:lotr)], Book.find_top_rated(:limit => 1)
   end
 
+  test "rated_by and rating_by when no rating should not break" do
+    books(:lotr).rate_it(5, users(:bill))
+    assert_equal false, books(:lotr).rated_by?(users(:jack))
+    assert_equal nil, books(:lotr).rating_by(users(:jack))
+  end
+
 end

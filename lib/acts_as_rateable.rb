@@ -64,12 +64,12 @@ module ActiveRecord
 
         # Checks whether a user rated the object or not.
         def rated_by?(user)
-          rating.user_ratings.exists?(:user_id => user)
+          rating && rating.user_ratings.exists?(:user_id => user)
         end
 
         # Returns the rating a specific user has given the object.
         def rating_by(user)
-          user_rating = rating.user_ratings.find_by_user_id(user.id)
+          user_rating = rating && rating.user_ratings.find_by_user_id(user.id)
           user_rating ? user_rating.score : nil
         end
 
