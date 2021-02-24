@@ -1,13 +1,12 @@
 Gem::Specification.new do |s|
   s.name     = "acts_as_rateable"
-  s.version  = "2.0.1"
-  s.date     = "2009-09-23"
+  s.version  = "2.0.2"
+  s.date     = "2020-02-24"
   s.summary  = "Rails plugin providing a rating interface for ActiveRecord models"
-  s.email    = "michael@mobalean.com"
-  s.homepage = "http://github.com/mreinsch/acts_as_rateable"
+  s.email    = "evanstv54@gmail.com"
+  s.homepage = "http://github.com/tez123z/acts_as_rateable"
   s.description = "Acts_as_rateable is a rails plugin providing a rating interface for ActiveRecord models."
-  s.has_rdoc = true
-  s.authors  = ["Ferenc Fekete", "Gabriel Gironda", "Michael Reinsch"]
+  s.authors  = ["Ferenc Fekete", "Gabriel Gironda", "Michael Reinsch", "Tom Evans"]
   s.rdoc_options  = ["--main", "README.rdoc"]
   s.extra_rdoc_files = ["README.rdoc", "CHANGELOG.rdoc", "MIT-LICENSE"]
   s.files         = `git ls-files`.split("\n")
